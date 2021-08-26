@@ -27,9 +27,7 @@ services:
       context: backend-mysql/
       dockerfile: Dockerfile
     volumes:
-    - type: volume
-      source: ./backend-mysql/db-data
-      target: /var/lib/mysql
+    - ./backend-mysql/db-data:/var/lib/mysql
     # volumes:
     # - db_data:/var/lib/mysql
     environment:
