@@ -9,8 +9,8 @@ services:
         condition: service_healthy
     networks:
     - application
-    # ports:
-    # - 8080:8080
+    ports:
+    - 8080:8080
   frontend:
     build: 
       context: frontend-node/
@@ -27,14 +27,18 @@ services:
       context: backend-mysql/
       dockerfile: Dockerfile
     volumes:
-    - db_data:/var/lib/mysql
+    - type: volume
+      source: ./backend-mysql/db-data
+      target: /var/lib/mysql
+    # volumes:
+    # - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: mysecret
       MYSQL_DATABASE: mydb
     networks:
     - application
-    # ports:
-    # - 3306:3306
+    ports:
+    - 3306:3306
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
@@ -42,5 +46,5 @@ services:
 networks:
   application:
     name: application
-volumes:
-  db_data: {}
+# volumes:
+#   db_data: {}
