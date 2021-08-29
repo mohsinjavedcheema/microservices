@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  backend:
+  backend-python:
     build: 
       context: backend-python/
       dockerfile: Dockerfile
@@ -11,7 +11,7 @@ services:
     - application
     ports:
     - 8080:8080
-  frontend:
+  frontend-node:
     build: 
       context: frontend-node/
       dockerfile: Dockerfile
@@ -22,17 +22,19 @@ services:
     - 9090:9090
     depends_on:
     - backend
-  db:
+  backend-mysql:
     build: 
       context: backend-mysql/
       dockerfile: Dockerfile
+    # For Bind
     # volumes:
     # - ./backend-mysql/db-data:/var/lib/mysql
+    # For volume data
     # volumes:
     # - db_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: mysecret
-      MYSQL_DATABASE: mydb
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: mysecret
+    #   MYSQL_DATABASE: mydb
     networks:
     - application
     ports:
@@ -43,6 +45,6 @@ services:
       retries: 10
 networks:
   application:
-    name: application
+    name: bridge
 # volumes:
 #   db_data: {}

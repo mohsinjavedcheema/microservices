@@ -1,11 +1,11 @@
 USE mydb;
-CREATE TABLE students (
+CREATE TABLE IF NOT EXISTS students (
     id int NOT NULL,
     lastName varchar(255) NOT NULL,
     firstName varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );
-CREATE TABLE instructors (
+CREATE TABLE IF NOT EXISTS instructors (
     id int NOT NULL,
     lastName varchar(255) NOT NULL,
     firstName varchar(255) NOT NULL,

@@ -4,7 +4,9 @@ from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 mysql = MySQL()
-app.config['MYSQL_DATABASE_HOST'] = 'db'
+# For docker compose
+# app.config['MYSQL_DATABASE_HOST'] = 'db'
+app.config['MYSQL_DATABASE_HOST'] = 'backend-mysql'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'mysecret'
 app.config['MYSQL_DATABASE_DB'] = 'mydb'

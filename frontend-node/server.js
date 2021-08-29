@@ -17,7 +17,7 @@ var request = require('request');
 app.get('/instructor/:id', (req, res) => {
   id = Number(req.params.id)
   let name = ""
-  request(String(`http://backend:8080/instructor/${id}`), function (error, response, body) {
+  request(String(`http://backend-python:8080/instructor/${id}`), function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var obj = JSON.parse(body);
       name = "Hello "+obj.firstName + " " + obj.lastName
@@ -30,7 +30,7 @@ app.get('/instructor/:id', (req, res) => {
 app.get('/student/:id', (req, res) => {
   id = Number(req.params.id)
   let name = ""
-  request(String(`http://backend:8080/student/${id}`), function (error, response, body) {
+  request(String(`http://backend-python:8080/student/${id}`), function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var obj = JSON.parse(body);
       if (id == 5) {
