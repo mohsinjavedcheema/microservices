@@ -5,10 +5,10 @@ services:
       context: backend-python/
       dockerfile: Dockerfile
     depends_on: 
-      db:
+      backend-mysql:
         condition: service_healthy
     networks:
-    - application
+    - mynetwork
     ports:
     - 8080:8080
   frontend-node:
@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     init: true
     networks:
-    - application
+    - mynetwork
     ports:
     - 9090:9090
     depends_on:
@@ -26,17 +26,15 @@ services:
     build: 
       context: backend-mysql/
       dockerfile: Dockerfile
-    # For Bind
-    # volumes:
-    # - ./backend-mysql/db-data:/var/lib/mysql
-    # For volume data
+    volumes:
+    - ./backend-mysql/dbdata:/var/lib/mysql
     # volumes:
     # - db_data:/var/lib/mysql
     # environment:
     #   MYSQL_ROOT_PASSWORD: mysecret
     #   MYSQL_DATABASE: mydb
     networks:
-    - application
+    - mynetwork
     ports:
     - 3306:3306
     healthcheck:
@@ -44,7 +42,7 @@ services:
       timeout: 20s
       retries: 10
 networks:
-  application:
-    name: bridge
+  mynetwork:
+    name: mynetwork
 # volumes:
 #   db_data: {}
