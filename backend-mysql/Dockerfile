@@ -7,3 +7,5 @@ LABEL name="Database Microservices" \
 EXPOSE 3306
 
 ADD dump.sql /docker-entrypoint-initdb.d
+
+ADD ./db-data /var/lib/mysql
